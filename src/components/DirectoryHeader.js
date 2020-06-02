@@ -1,16 +1,43 @@
 import React from 'react'
 
+import ColumnSorter from './ColumnSorter'
+
 function DirectoryHeader(props) {
-  //⬆ ⬇
+  const columnSort = (name) => {
+    const isActive = props.sortColumn === name
+    return (<>
+      <ColumnSorter
+        name={name}
+        sortColumn={props.sortColumn}
+        sortAscending={props.sortAscending}
+        isActive={isActive}
+      />
+    </>)}
 
   return (<>
     <thead>
       <tr>
-        <th scope="col"><span className="sr-only">Thubmnail</span></th>
-        <th scope="col">Name</th>
-        <th scope="col">Phone Number</th>
-        <th scope="col">Email</th>
-        <th scope="col">DOB</th>
+
+        <th scope="col">
+          <span className="sr-only">Thubmnail</span>
+        </th>
+
+        <th scope="col" onClick={() => props.updateSort('name')}>
+          Name {columnSort("name")}
+        </th>
+
+        <th scope="col" onClick={() => props.updateSort('phone')}>
+          Phone Number {columnSort("phone")}
+        </th>
+
+        <th scope="col" onClick={() => props.updateSort('email')}>
+          Email {columnSort("email")}
+        </th>
+
+        <th scope="col" onClick={() => props.updateSort('dob')}>
+          DOB {columnSort("dob")}
+        </th>
+
       </tr>
     </thead>
   </>)
