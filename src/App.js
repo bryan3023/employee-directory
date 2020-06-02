@@ -39,7 +39,7 @@ class App extends React.Component {
           <DirectoryHeader />
           <DirectoryBody>
             {this.state.directoryEntries.map(entry => (<>
-              <DirectoryEntry />
+              <DirectoryEntry entry={entry} />
             </>))}
           </DirectoryBody>
         </DirectoryTable>
