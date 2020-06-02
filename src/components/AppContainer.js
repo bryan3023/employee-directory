@@ -2,7 +2,7 @@ import React from 'react'
 
 function AppContainer(props) {
   return (<>
-    <div class="container">
+    <div className="container">
       {props.children}
     </div>
   </>)
