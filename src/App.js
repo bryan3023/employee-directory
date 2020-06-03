@@ -84,8 +84,8 @@ class App extends React.Component {
 
 
   /*
-    Given a full name, return true if either the any name begins
-    with the current search string.
+    Given a full name, return true if any name begins with the current
+    search string.
    */
   searchNames = ({name}) => {
     const
