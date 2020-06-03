@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const URL = 'https://randomuser.me/api/?nat=us&results=10'
+const
+  URL = 'https://randomuser.me/api/?nat=us&results=50',
+  feilds = 'inc=name,email,phone,dob,picture'
 
 const getDirectoryEntry = result => {
   return {
@@ -15,7 +17,7 @@ const getDirectoryEntry = result => {
 
 export default {
   getRandomUserSet() {
-    return axios.get(URL)
+    return axios.get(`${URL}&${feilds}`)
   },
 
   getDirectoryEntries(results) {
