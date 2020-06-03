@@ -4,7 +4,7 @@ function SearchForm(props) {
   return (
     <div className="row mb-3">
       <div className="col-12 col-md-6 offset-md-3">
-        <form className="form-group">
+        <form className="form-group" onSubmit={event => event.preventDefault()}>
           <label htmlFor="search" className="sr-only">Type a name to filter results:</label>
           <input
             name="search"
