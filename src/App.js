@@ -84,16 +84,17 @@ class App extends React.Component {
 
 
   /*
-    Given a full name, return true if either the given name or
-    surname begin with the current search string.
+    Given a full name, return true if either the any name begins
+    with the current search string.
    */
   searchNames = ({name}) => {
     const
       search = this.state.search.trim().toLowerCase(),
-      [given, surname] = name.toLowerCase().split(" ")
+      names = name.toLowerCase().split(/(-|\s)/),
+      match = (accumulator, currentValue) =>
+        accumulator || currentValue.startsWith(search)
 
-    return given.startsWith(search)
-      || surname.startsWith(search)
+    return names.reduce(match, false)
   }
 
 
