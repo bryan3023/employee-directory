@@ -3,6 +3,7 @@ import React from 'react'
 import ColumnSorter from './ColumnSorter'
 
 function DirectoryHeader(props) {
+
   const columnSort = (name) => {
     const isActive = props.sortColumn === name
     return (
@@ -11,7 +12,8 @@ function DirectoryHeader(props) {
         sortAscending={props.sortAscending}
         isActive={isActive}
       />
-    )}
+    )
+  }
 
   return (
     <thead>
@@ -21,19 +23,19 @@ function DirectoryHeader(props) {
           <span className="sr-only">Photo</span>
         </th>
 
-        <th scope="col" onClick={() => props.updateSort('name')}>
+        <th scope="col" onClick={() => props.handleSortChange('name')}>
           Name {columnSort("name")}
         </th>
 
-        <th scope="col" onClick={() => props.updateSort('phone')}>
+        <th scope="col" onClick={() => props.handleSortChange('phone')}>
           Phone Number {columnSort("phone")}
         </th>
 
-        <th scope="col" onClick={() => props.updateSort('email')}>
+        <th scope="col" onClick={() => props.handleSortChange('email')}>
           Email {columnSort("email")}
         </th>
 
-        <th scope="col" onClick={() => props.updateSort('dob')}>
+        <th scope="col" onClick={() => props.handleSortChange('dob')}>
           DOB {columnSort("dob")}
         </th>
 

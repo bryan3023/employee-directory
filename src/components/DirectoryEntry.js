@@ -2,8 +2,7 @@ import React from 'react'
 import Moment from 'react-moment'
 
 function DirectoryEntry({entry}) {
-  const
-    thumbnailAlt = `${entry.name}'s photo`
+  const thumbnailAlt = `${entry.name}'s photo`
 
   return (
     <tr>

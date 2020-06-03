@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import './App.css'
 
 import AppHeader from './components/AppHeader'
@@ -20,6 +20,7 @@ class App extends React.Component {
     search: ""
   }
 
+
   componentDidMount = () => {
     API.getRandomUserSet()
       .then(results => {
@@ -29,6 +30,39 @@ class App extends React.Component {
       .catch(error => console.error(error))
   }
 
+
+  render = () => {
+    return (<>
+      <AppHeader />
+      <AppContainer>
+        <SearchForm
+          value={this.state.search}
+          handleInputChange={this.handleInputChange}
+        />
+        <DirectoryTable>
+          <DirectoryHeader
+            sortColumn={this.state.sortColumn}
+            sortAscending={this.state.sortAscending}
+            handleSortChange={this.handleSortChange}
+          />
+          <DirectoryBody>
+            {this.state.directoryEntries
+              .filter(entry => this.searchNames(entry))
+              .sort(this.compareEntries)
+              .map(entry => (
+                <DirectoryEntry entry={entry} key={entry.name} />
+              ))
+            }
+          </DirectoryBody>
+        </DirectoryTable>
+      </AppContainer>
+    </>)
+  }
+
+
+  /*
+    Update the search value based on what the user typed.
+   */
   handleInputChange = event => {
     event.preventDefault()
 
@@ -36,23 +70,38 @@ class App extends React.Component {
     this.setState({[name]: value})
   }
 
+
+  /*
+    Change the table's row sort based on the column that was clicked.
+   */
+  handleSortChange = column => {
+    if (column === this.state.sortColumn) {
+      this.setState({sortAscending: !this.state.sortAscending})
+    } else {
+      this.setState({sortColumn: column})
+    }
+  }
+
+
+  /*
+    Given a full name, return true if either the given name or
+    surname begin with the current search string.
+   */
   searchNames = ({name}) => {
     const
       search = this.state.search.trim().toLowerCase(),
-      [first, last] = name.toLowerCase().split(" ")
+      [given, surname] = name.toLowerCase().split(" ")
 
-    return first.startsWith(search)
-      || last.startsWith(search)
+    return given.startsWith(search)
+      || surname.startsWith(search)
   }
 
 
-  compareDates = (a,b) => {
-    if (a < b) return -1
-    if (a > b) return 1
-    return 0
-  }
+  /*
+    Compare directoriy entries and return a sortable value.
 
-
+    Results depend on the current sorting column and direction.
+   */
   compareEntries = (a,b) => {
     const
       property = this.state.sortColumn,
@@ -69,40 +118,14 @@ class App extends React.Component {
     }
   }
 
-  updateSort = column => {
-    if (column === this.state.sortColumn) {
-      this.setState({sortAscending: !this.state.sortAscending})
-    } else {
-      this.setState({sortColumn: column})
-    }
-  }
 
-  render = () => {
-    return (<>
-      <AppHeader />
-      <AppContainer>
-        <SearchForm
-          value={this.state.search}
-          handleInputChange={this.handleInputChange}
-        />
-        <DirectoryTable>
-          <DirectoryHeader
-            sortColumn={this.state.sortColumn}
-            sortAscending={this.state.sortAscending}
-            updateSort={this.updateSort}
-          />
-          <DirectoryBody>
-            {this.state.directoryEntries
-              .filter(entry => this.searchNames(entry))
-              .sort(this.compareEntries)
-              .map((entry) => {
-                return (
-                  <DirectoryEntry entry={entry} key={entry.name} />
-                )})}
-          </DirectoryBody>
-        </DirectoryTable>
-      </AppContainer>
-    </>)
+  /*
+    Compare dates and return a sortable value.
+   */
+  compareDates = (a,b) => {
+    if (a < b) return -1
+    if (a > b) return 1
+    return 0
   }
 }
 
