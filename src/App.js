@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import './App.css'
 
 import AppHeader from './components/AppHeader'
@@ -23,14 +23,7 @@ class App extends React.Component {
   componentDidMount = () => {
     API.getRandomUserSet()
       .then(results => {
-        const entries = results.data.results.map(e => { return {
-          name: `${e.name.first} ${e.name.last}`,
-          thumbnail: e.picture.thumbnail,
-          email: e.email,
-          phone: e.phone,
-          dob: new Date(e.dob.date)
-        }})
-        console.log(entries)
+        const entries = API.getDirectoryEntries(results)
         this.setState({directoryEntries: entries})
       })
       .catch(error => console.error(error))
@@ -59,6 +52,7 @@ class App extends React.Component {
     return 0
   }
 
+
   compareEntries = (a,b) => {
     const
       property = this.state.sortColumn,
@@ -66,13 +60,13 @@ class App extends React.Component {
 
     if (property === 'dob') {
       return this.compareDates(a[property],b[property]) * direction
+    } else {
+      const
+        normalizedA = a[property].toLowerCase(),
+        normalizedB = b[property].toLowerCase()
+
+      return normalizedA.localeCompare(normalizedB) * direction
     }
-
-    const
-      canonicalA = a[property].toLowerCase(),
-      canonicalB = b[property].toLowerCase()
-
-    return canonicalA.localeCompare(canonicalB) * direction
   }
 
   updateSort = column => {
@@ -96,15 +90,15 @@ class App extends React.Component {
             sortColumn={this.state.sortColumn}
             sortAscending={this.state.sortAscending}
             updateSort={this.updateSort}
-            />
+          />
           <DirectoryBody>
             {this.state.directoryEntries
               .filter(entry => this.searchNames(entry))
               .sort(this.compareEntries)
-              .map((entry, key) => {
-                return (<>
-                  <DirectoryEntry entry={entry} key={key} />
-                </>)})}
+              .map((entry) => {
+                return (
+                  <DirectoryEntry entry={entry} key={entry.name} />
+                )})}
           </DirectoryBody>
         </DirectoryTable>
       </AppContainer>

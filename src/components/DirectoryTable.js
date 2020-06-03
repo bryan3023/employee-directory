@@ -1,7 +1,7 @@
 import React from 'react'
 
 function DirectoryTable(props) {
-  return (<>
+  return (
     <div className="row">
       <div className="col-12">
         <div className="table-responsive">
@@ -11,7 +11,7 @@ function DirectoryTable(props) {
         </div>
       </div>
     </div>
-  </>)
+  )
 }
 
 export default DirectoryTable

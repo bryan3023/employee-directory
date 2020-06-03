@@ -5,21 +5,20 @@ import ColumnSorter from './ColumnSorter'
 function DirectoryHeader(props) {
   const columnSort = (name) => {
     const isActive = props.sortColumn === name
-    return (<>
+    return (
       <ColumnSorter
         name={name}
-        sortColumn={props.sortColumn}
         sortAscending={props.sortAscending}
         isActive={isActive}
       />
-    </>)}
+    )}
 
-  return (<>
+  return (
     <thead>
       <tr>
 
         <th scope="col">
-          <span className="sr-only">Thubmnail</span>
+          <span className="sr-only">Photo</span>
         </th>
 
         <th scope="col" onClick={() => props.updateSort('name')}>
@@ -40,7 +39,7 @@ function DirectoryHeader(props) {
 
       </tr>
     </thead>
-  </>)
+  )
 }
 
 export default DirectoryHeader

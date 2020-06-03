@@ -1,11 +1,11 @@
 import React from 'react'
 
 function DirectoryBody(props) {
-  return (<>
+  return (
     <tbody>
       {props.children}
     </tbody>
-  </>)
+  )
 }
 
 export default DirectoryBody

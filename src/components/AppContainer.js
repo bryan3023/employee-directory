@@ -1,11 +1,11 @@
 import React from 'react'
 
 function AppContainer(props) {
-  return (<>
+  return (
     <div className="container">
       {props.children}
     </div>
-  </>)
+  )
 }
 
 export default AppContainer

@@ -1,7 +1,7 @@
 import React from 'react'
 
 function SearchForm(props) {
-  return (<>
+  return (
     <div className="row mb-3">
       <div className="col-12 col-md-6 offset-md-3">
         <form className="form-group">
@@ -18,7 +18,7 @@ function SearchForm(props) {
         </form>
       </div>
     </div>
-  </>)
+  )
 }
 
 export default SearchForm
