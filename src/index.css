@@ -12,6 +12,6 @@ code {
     monospace;
 }
 
-th {
+th.sortable {
   cursor: pointer;
 }

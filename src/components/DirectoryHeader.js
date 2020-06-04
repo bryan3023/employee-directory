@@ -1,19 +1,17 @@
 import React from 'react'
 
-import ColumnSorter from './ColumnSorter'
+import SortableColumn from './SortableColumn'
 
 function DirectoryHeader(props) {
 
-  const columnSort = (name) => {
-    const isActive = props.sortColumn === name
-    return (
-      <ColumnSorter
-        name={name}
-        sortAscending={props.sortAscending}
-        isActive={isActive}
-      />
-    )
-  }
+  const renderSortableColumn = (name, text) =>
+    <SortableColumn
+      name={name}
+      text={text}
+      sortColumn={props.sortColumn}
+      sortAscending={props.sortAscending}
+      handleSortChange={props.handleSortChange}
+    />
 
   return (
     <thead>
@@ -23,21 +21,10 @@ function DirectoryHeader(props) {
           <span className="sr-only">Photo</span>
         </th>
 
-        <th scope="col" onClick={() => props.handleSortChange('name')}>
-          Name {columnSort("name")}
-        </th>
-
-        <th scope="col" onClick={() => props.handleSortChange('phone')}>
-          Phone Number {columnSort("phone")}
-        </th>
-
-        <th scope="col" onClick={() => props.handleSortChange('email')}>
-          Email {columnSort("email")}
-        </th>
-
-        <th scope="col" onClick={() => props.handleSortChange('dob')}>
-          DOB {columnSort("dob")}
-        </th>
+        {renderSortableColumn('name', 'Name')}
+        {renderSortableColumn('phone', 'Phone Number')}
+        {renderSortableColumn('email', 'Email')}
+        {renderSortableColumn('dob', 'Date of Birth')}
 
       </tr>
     </thead>
