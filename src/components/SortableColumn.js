@@ -2,7 +2,7 @@ import React from 'react'
 
 function SortableColumn(props) {
 
-  const renderSortIndicator = () =>{
+  const renderSortIndicator = () => {
     const
       isActive = props.sortColumn === props.name,
       sortText = props.sortAscending ? '⬆' : '⬇'
