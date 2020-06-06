@@ -8,7 +8,7 @@ function SearchForm(props) {
           <label htmlFor="search" className="sr-only">Type a name to filter results:</label>
           <input
             name="search"
-            value={props.search}
+            value={props.value}
             type="text"
             onChange={props.handleInputChange}
             placeholder="Type a name to filter results"

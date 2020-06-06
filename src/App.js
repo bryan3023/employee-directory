@@ -47,7 +47,7 @@ class App extends React.Component {
           />
           <DirectoryBody>
             {this.state.directoryEntries
-              .filter(entry => this.searchNames(entry))
+              .filter(this.matchNames)
               .sort(this.compareEntries)
               .map(entry => (
                 <DirectoryEntry entry={entry} key={entry.name} />
@@ -87,7 +87,7 @@ class App extends React.Component {
     Given a full name, return true if any name begins with the current
     search string.
    */
-  searchNames = ({name}) => {
+  matchNames = ({name}) => {
     const
       search = this.state.search.trim().toLowerCase(),
       names = name.toLowerCase().split(/(-|\s)/),
