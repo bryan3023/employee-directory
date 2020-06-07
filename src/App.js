@@ -99,7 +99,7 @@ class App extends React.Component {
 
 
   /*
-    Compare directoriy entries and return a sortable value.
+    Compare directory entries and return a sortable value.
 
     Results depend on the current sorting column and direction.
    */
