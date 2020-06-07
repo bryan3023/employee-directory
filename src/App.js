@@ -99,7 +99,7 @@ class App extends React.Component {
 
 
   /*
-    Compare directory entries and return a sortable value.
+    Compare directory entries and return a sort value.
 
     Results depend on the current sorting column and direction.
    */
@@ -121,7 +121,7 @@ class App extends React.Component {
 
 
   /*
-    Compare dates and return a sortable value.
+    Compare dates and return a sort value.
    */
   compareDates = (a,b) => {
     if (a < b) return -1
